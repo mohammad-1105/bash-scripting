@@ -43,3 +43,6 @@
 
 # (Same as before) Is it a shortcut?
 [[ -L "${file}" ]]  # "Is '${file}' a shortcut?" (True if yes)
+
+# Is it empty?
+[[ -z ${var} ]] # Is ${var} empty?
