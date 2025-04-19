@@ -1,53 +1,59 @@
 #!/bin/bash
 
-# If you have ever heard of programming languages, you will know that arrays are a very important part of them.
-# In Bash, arrays are a way to store a collection of values in a single variable.
+# Working with Arrays in Bash
 
-# Let's see how to create an array in Bash:
+# Arrays are a way to store a list of items (values) under a single name.
 
-array=(1 2 3 4 5) # Here 1 2 3 4 5 are the values of the array
-# Note: the values are separated by spaces not commas
+# Creating an array:
+my_numbers=(10 20 30 40 50) # Values are separated by spaces.
 
-echo ${array} # Output: 1
+echo "${my_numbers}" # Shows only the first element: 10
 
-# To print all the elements of array
-echo ${array[@]} # Output: 1 2 3 4 5
+# To see all items in the array:
+echo "${my_numbers[@]}" # Output: 10 20 30 40 50
 
-# To print the first element of array
-echo ${array[0]} # Output: 1
+# Getting a specific item (element) by its position (index):
+# Array positions start from 0.
+echo "${my_numbers[0]}" # Output: 10 (the first item)
 
-# To print the last element of array
-echo ${array[-1]} # Output: 5
+# Getting the last item:
+echo "${my_numbers[@]: -1}" # Output: 50
 
-# To print the length of array
-echo ${#array[@]} # Output: 5 # Note: `#` before array name represent the length of array and the length of array is 5
+# Finding out how many items are in the array:
+echo "${#my_numbers[@]}" # Output: 5 (there are 5 items)
+# '#' before the array name with '@' inside gives the total count.
 
-# Now to print the length of specific element to array we have to use ${#array[index]}
+# Finding the length of a specific item (string) in the array:
+names=("Aman" "Sakir" "Charlie")
+echo "${#names[0]}" # Output: 5 (length of "Aman")
+echo "${#names[1]}" # Output: 3 (length of "Sakir")
 
-names=("Aman" "Sakir" "Abdul")
-echo ${#names[0]} # Output: 4
-echo ${#names[1]} # Output: 5
+# Getting a part of the array (Array "Slicing"):
+# You can pick out a section of the array.
 
-# NOW Array Slicing
-# While Bash doesn't support true array slicing, you can achieve similar results using a combination of array indexing and string slicing:
+echo "${names[@]:1:2}" # Output: Sakir Charlie
+# Start at position 1, take 2 items.
 
-echo ${names[@]:1:2} # Output: Sakir Abdul [Start from index 1 and take 2 elements of array]
-echo ${array[@]:2}   # Output: 3 4 5
+echo "${my_numbers[@]:2}" # Output: 30 40 50
+# Start at position 2 and take all remaining items.
 
-# NOW String Slicing
-# It's same like array slicing but for strings
+# Working with parts of text (String Slicing):
 
-strings="Hello World"
+text="Bash Scripting"
 
-# Print the first 5 characters of the string
-echo ${strings:0:5} # Output: Hello [here 0 represent the index of first character of string and 5 represent the number of characters to be printed]
+# Get the first 4 letters:
+echo "${text:0:4}" # Output: Bash
+# Start at the first letter (position 0), take 4 letters.
 
-# Print the last 5 characters of the string
-echo ${strings:6:5} # Output: World
+# Get letters from position 5 onwards:
+echo "${text:5}" # Output: Scripting
 
-# NOTE:  that the second number in the slice notation represents the
-# maximum length of the extracted substring, not the ending index. This
-# is different from some other programming languages like Python. In
-# Bash, if you specify a length that would extend beyond the end of the
-# string, it will simply stop at the end of the string without raising an
-# error
+# Get the last 7 letters:
+echo "${text: -7}" # Output: cripting
+
+# Important note about string slicing length:
+# The second number after the colon in string slicing (like in "${text:0:4}")
+# tells Bash the maximum number of characters to grab, not the position to stop.
+# If you ask for more characters than are left in the string, it will just give
+# you the rest of the string without any errors. This is different from how
+# slicing works in some other languages like Python."
